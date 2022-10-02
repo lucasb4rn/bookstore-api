@@ -26,10 +26,10 @@ public class DBService {
 		Categoria cat3 = new Categoria(null, "Biografias", "Livros de Briografia");
 
 		Livro livro1 = new Livro(null, "Clean code", "Robert Martin", "Lorem ipsum", cat1);
-		Livro livro2 = new Livro(null, "Engenharia de Software", "Louis", "Lorem ipsum", cat1);
-		Livro livro3 = new Livro(null, "The Time Machine", "H.G", "Lorem ipsum", cat1);
-		Livro livro4 = new Livro(null, "The war of the worlds", "H.G wells", "Lorem ipsum", cat1);
-		Livro livro5 = new Livro(null, "I, Robot", "H.G Wells", "Lorem ipsum", cat1);
+		Livro livro2 = new Livro(null, "Engenharia de Software", "Louis", "Lorem ipsum", cat2);
+		Livro livro3 = new Livro(null, "The Time Machine", "H.G", "Lorem ipsum", cat2);
+		Livro livro4 = new Livro(null, "The war of the worlds", "H.G wells", "Lorem ipsum", cat2);
+		Livro livro5 = new Livro(null, "I, Robot", "H.G Wells", "Lorem ipsum", cat3);
 
 		cat1.getLivros().addAll(Arrays.asList(livro1, livro2));
 		cat2.getLivros().addAll(Arrays.asList(livro3, livro4, livro5));
