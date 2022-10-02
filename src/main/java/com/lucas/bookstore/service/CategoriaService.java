@@ -1,5 +1,7 @@
 package com.lucas.bookstore.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,9 +15,13 @@ public class CategoriaService {
 	@Autowired
 	CategoriaRepository categoriaRepository;
 
-	public <Optional>Categoria findById(Integer id) {
+	public <Optional> Categoria findById(Integer id) {
 		return categoriaRepository.findById(id).orElseThrow(() -> new ObjectNotFoundException(
 				"Objeto não encontrado! id: " + id + ", Tipo: " + Categoria.class.getName()));
+	}
+
+	public List<Categoria> findAll() {
+		return categoriaRepository.findAll();
 	}
 
 }
