@@ -22,7 +22,7 @@ public class Categoria implements Serializable {
 	private String nome;
 	private String descricao;
 
-	@OneToMany(mappedBy = "Categoria")
+	@OneToMany(mappedBy = "categoria")
 	private List<Livro> Livros = new ArrayList<>();
 
 	public Categoria() {
@@ -30,12 +30,11 @@ public class Categoria implements Serializable {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Categoria(Integer id, String nome, String descricao, List<Livro> livros) {
+	public Categoria(Integer id, String nome, String descricao) {
 		super();
 		this.id = id;
 		this.nome = nome;
 		this.descricao = descricao;
-		Livros = livros;
 	}
 
 	public Integer getId() {

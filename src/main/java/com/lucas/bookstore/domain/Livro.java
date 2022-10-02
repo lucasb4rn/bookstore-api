@@ -18,20 +18,22 @@ public class Livro {
 	private String titulo;
 	private String nomeAutor;
 	private String texto;
-	
+
 	@ManyToOne
-	@JoinColumn(name="id_categoria")
+	@JoinColumn(name = "id_categoria")
 	private Categoria categoria;
 
 	public Livro() {
 		super();
 	}
 
-	public Livro(Integer id, String titulo, String nomeAutor, String texto) {
+	public Livro(Integer id, String titulo, String nomeAutor, String texto, Categoria categoria) {
+		super();
 		this.id = id;
 		this.titulo = titulo;
 		this.nomeAutor = nomeAutor;
 		this.texto = texto;
+		this.categoria = categoria;
 	}
 
 	public Integer getId() {
@@ -64,6 +66,14 @@ public class Livro {
 
 	public void setTexto(String texto) {
 		this.texto = texto;
+	}
+
+	public Categoria getCategoria() {
+		return categoria;
+	}
+
+	public void setCategoria(Categoria categoria) {
+		this.categoria = categoria;
 	}
 
 	@Override
