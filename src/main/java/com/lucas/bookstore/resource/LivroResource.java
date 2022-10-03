@@ -57,6 +57,7 @@ public class LivroResource {
 
 	}
 
+	//localhost:8080/livros?categoria=1
 	@PostMapping
 	public ResponseEntity<Livro> create(@RequestParam(value = "categoria", defaultValue = "0") Integer id_cat,
 			@RequestBody Livro obj) {
@@ -64,7 +65,7 @@ public class LivroResource {
 		URI uri = ServletUriComponentsBuilder.fromCurrentContextPath().path("/livros/{id}")
 				.buildAndExpand(newObj.getId()).toUri();
 		return ResponseEntity.created(uri).build();
-
 	}
+	
 
 }
