@@ -3,6 +3,7 @@ package com.lucas.bookstore.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 import com.lucas.bookstore.domain.Categoria;
@@ -51,6 +52,11 @@ public class LivroService {
 		Categoria cat = categoriaService.findById(id_cat);
 		obj.setCategoria(cat);
 		return livroRepository.save(obj);
+	}
+
+	public void delete(Integer id) {
+		Livro obj = findById(id);
+		livroRepository.deleteById(id);
 	}
 
 }
