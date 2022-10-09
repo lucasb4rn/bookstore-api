@@ -23,8 +23,7 @@ import com.lucas.bookstore.domain.Categoria;
 import com.lucas.bookstore.dtos.CategoriaDTO;
 import com.lucas.bookstore.service.CategoriaService;
 
-
-@CrossOrigin("*")
+@CrossOrigin(origins= {"*"}, maxAge = 4800, allowCredentials = "false")
 @RestController
 @RequestMapping(value = "/categorias")
 public class CategoriaResource {

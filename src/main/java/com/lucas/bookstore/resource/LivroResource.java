@@ -25,8 +25,8 @@ import com.lucas.bookstore.domain.Livro;
 import com.lucas.bookstore.dtos.LivroDTO;
 import com.lucas.bookstore.service.LivroService;
 
-@CrossOrigin("*")
 @RestController
+@CrossOrigin(origins = "*")
 @RequestMapping(value = "/livros")
 public class LivroResource {
 
