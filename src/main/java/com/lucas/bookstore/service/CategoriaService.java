@@ -46,7 +46,6 @@ public class CategoriaService {
 		} catch (org.springframework.dao.DataIntegrityViolationException e) {
 			throw new DataIntegrityViolationException("Categoria não pode ser deletada! Possui livros associados!");
 		}
-		categoriaRepository.deleteById(id);
 	}
 
 }
