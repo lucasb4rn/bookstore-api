@@ -3,12 +3,18 @@ package com.lucas.bookstore.service;
 import java.util.Arrays;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.lucas.bookstore.domain.Categoria;
 import com.lucas.bookstore.domain.Livro;
+import com.lucas.bookstore.domain.RoleModel;
+import com.lucas.bookstore.domain.UserModel;
+import com.lucas.bookstore.enums.RoleName;
 import com.lucas.bookstore.repositoies.CategoriaRepository;
 import com.lucas.bookstore.repositoies.LivroRepository;
+import com.lucas.bookstore.repositoies.RoleRepository;
+import com.lucas.bookstore.repositoies.UserRepository;
 
 @Service
 public class DBService {
@@ -19,7 +25,21 @@ public class DBService {
 	@Autowired
 	LivroRepository livroRepository;
 
+	@Autowired
+	UserRepository userRepository;
+	
+	@Autowired
+	RoleRepository roleRepository;
+
 	public void instaciaBaseDeDados() {
+
+		RoleModel roleAdmin = new RoleModel(RoleName.ROLE_ADMIN);
+		RoleModel roleUser = new RoleModel(RoleName.ROLE_USER);
+		
+		this.roleRepository.saveAll(Arrays.asList(roleAdmin, roleUser));
+		
+		UserModel user = new UserModel("maria", new BCryptPasswordEncoder().encode("maria123"), Arrays.asList(roleAdmin));
+		UserModel user1 = new UserModel("joao", new BCryptPasswordEncoder().encode("joao123"), Arrays.asList(roleUser));
 
 		Categoria cat1 = new Categoria(null, "Informatica", "Livros de TI");
 		Categoria cat2 = new Categoria(null, "Ficção Cientifica", "Ficção Cientifica");
@@ -36,6 +56,8 @@ public class DBService {
 
 		this.categoriaRepository.saveAll(Arrays.asList(cat1, cat2, cat3));
 		this.livroRepository.saveAll(Arrays.asList(livro1, livro2, livro3, livro4, livro5));
+		this.userRepository.saveAll(Arrays.asList(user, user1));
+		
 
 	}
 

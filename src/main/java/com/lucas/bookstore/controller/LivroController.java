@@ -1,4 +1,4 @@
-package com.lucas.bookstore.resource;
+package com.lucas.bookstore.controller;
 
 import java.net.URI;
 import java.util.List;
@@ -8,6 +8,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,11 +29,12 @@ import com.lucas.bookstore.service.LivroService;
 @RestController
 @CrossOrigin(origins = "*")
 @RequestMapping(value = "/livros")
-public class LivroResource {
+public class LivroController {
 
 	@Autowired
 	LivroService livroService;
 
+	@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')")
 	@GetMapping(value = "/{id}")
 	public ResponseEntity<Livro> buscaLivroPorId(@PathVariable Integer id) {
 		Livro livro = livroService.findById(id);
@@ -40,6 +42,7 @@ public class LivroResource {
 	}
 
 	// localhost:8080/livros?categoria=1
+	@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')")
 	@GetMapping
 	public ResponseEntity<List<LivroDTO>> findAll(
 			@RequestParam(value = "categoria", defaultValue = "0") Integer id_cat) {
@@ -48,6 +51,7 @@ public class LivroResource {
 		return ResponseEntity.ok().body(listaDTO);
 	}
 
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@PutMapping(value = "/{id}")
 	public ResponseEntity<Livro> update( @PathVariable Integer id, @Valid @RequestBody Livro obj) {
 		Livro newObj = livroService.update(id, obj);
@@ -55,6 +59,7 @@ public class LivroResource {
 
 	}
 
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@PatchMapping(value = "/{id}")
 	public ResponseEntity<Livro> updatePatch( @PathVariable Integer id, @Valid @RequestBody Livro obj) {
 		Livro newObj = livroService.update(id, obj);
@@ -63,8 +68,9 @@ public class LivroResource {
 	}
 
 	// localhost:8080/livros?categoria=1
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@PostMapping
-	public ResponseEntity<Livro> create( @RequestParam(value = "categoria", defaultValue = "0") Integer id_cat,
+	public ResponseEntity<Livro> create(@RequestParam(value = "categoria", defaultValue = "0") Integer id_cat,
 			@Valid @RequestBody Livro obj) {
 		Livro newObj = livroService.create(id_cat, obj);
 		URI uri = ServletUriComponentsBuilder.fromCurrentContextPath().path("/livros/{id}")
@@ -72,6 +78,7 @@ public class LivroResource {
 		return ResponseEntity.created(uri).build();
 	}
 
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@DeleteMapping(value = "/{id}")
 	public ResponseEntity<Void> delete(@PathVariable Integer id) {
 		livroService.delete(id);

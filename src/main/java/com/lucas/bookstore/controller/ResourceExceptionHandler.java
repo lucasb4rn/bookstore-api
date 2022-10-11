@@ -1,4 +1,4 @@
-package com.lucas.bookstore.resource;
+package com.lucas.bookstore.controller;
 
 import javax.servlet.ServletRequest;
 
